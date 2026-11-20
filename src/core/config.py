@@ -11,7 +11,6 @@ class DataBaseConfig(BaseModel):
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 10
-    max_pool_size: int = 10
     max_overflow: int = 10
 
 class Settings(BaseSettings):
