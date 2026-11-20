@@ -7,6 +7,7 @@ from src.core.config import settings
 
 
 class DataBaseHelper:
+
     def __init__(self ,
                  url: str,
                  echo: bool = False,
@@ -21,22 +22,21 @@ class DataBaseHelper:
             max_overflow=max_overflow
         )
 
-        self.session_factor = async_sessionmaker[AsyncSession] = async_sessionmaker(
+        self.session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(
             bind = self.engine,
             expire_on_commit = False,
             autoflush = False,
-            autocommit = False,
         )
+    async def dispose(self) -> None:
+        await self.engine.dispose()
 
-        async def dispose()-> None:
-            return await self.engine.dispose()
+    async def session_getter(self)-> AsyncGenerator[AsyncSession, None]:
+        async with self.session_factory() as session:
+            yield session
 
-        async def session_getter() -> AsyncGenerator[AsyncSession, None]:
-            async with self.session_factor() as session:
-                yield session
 
 db_helper = DataBaseHelper(
-    url = settings.database_config.url,
+    url = str(settings.database_config.url),
     echo = settings.database_config.echo,
     echo_pool = settings.database_config.echo_pool,
     pool_size = settings.database_config.pool_size,
