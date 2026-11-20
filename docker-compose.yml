@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  pg:
+    image: postgres:latest
+    container_name: postgres_datacenter
+    environment:
+      POSTGRES_DB: datacenter
+      POSTGRES_USER: serhii
+      POSTGRES_PASSWORD: serhii2006
+    ports:
+      - "5433:5432"
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer_datacenter
+    ports:
+      - "8080:8080"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_datacenter
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
