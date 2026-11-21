@@ -17,6 +17,11 @@ class DataBaseConfig(BaseModel):
     pool_size: int = 10
     max_overflow: int = 10
 
+class AuthConfig(BaseModel):
+    secret_key: str
+    algorithm: str = 'HS256'
+    access_token_expire_minutes: int = 60
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=BASE_DIR / '.env',
@@ -24,6 +29,7 @@ class Settings(BaseSettings):
     )
     run_config: RunConfig = RunConfig()
     database_config: DataBaseConfig
+    auth_config: AuthConfig
 
 
 settings = Settings()
