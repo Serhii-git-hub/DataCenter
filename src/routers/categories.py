@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from auth.deps import get_current_user, require_roles
+from src.auth.deps import get_current_user, require_roles
 from db.db_helper import db_helper
 from model import Categories, User
 from schemas.categories import CategoriesRead, CategoriesCreate, CategoriesUpdate
