@@ -3,9 +3,9 @@ from typing import Literal
 from pydantic import BaseModel, Field, ConfigDict
 
 class UserCreate(BaseModel):
-    password: str = Field(min_length= 6, max_length=64)
     full_name: str = Field(max_length=128, min_length=3)
     login: str = Field(max_length=100, min_length=3)
+    password: str = Field(min_length= 6, max_length=64)
     role: Literal["admin", "master" , "storekeeper"]
 
 class UserRead(BaseModel):
