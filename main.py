@@ -7,6 +7,9 @@ from sqlalchemy import text
 
 from core.config import settings
 from db.db_helper import db_helper
+from routers.auth import router as auth_router
+
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -17,7 +20,7 @@ async def lifespan(app: FastAPI):
 main_app = FastAPI(
     lifespan=lifespan
 )
-
+main_app.include_router(auth_router)
 @main_app.get("/health")
 async def health(session: AsyncSession = Depends(db_helper.session_getter)):
     result = await session.execute(text("SELECT 1"))
