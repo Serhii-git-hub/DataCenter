@@ -15,7 +15,6 @@ async def main():
         )
         session.add(admin)
         await session.commit()
-        print(f'{admin.user_id}')
     await db_helper.dispose()
 
 if __name__ == '__main__':
