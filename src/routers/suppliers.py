@@ -31,7 +31,7 @@ async def create_supplier(data: SupplierCreate,
         await session.commit()
     except IntegrityError:
         await session.rollback()
-        raise HTTPException(status_code=400, detail="This supplier already exists")
+        raise HTTPException(status_code=409, detail="This supplier is in use")
     await session.refresh(supplier)
     return supplier
 
