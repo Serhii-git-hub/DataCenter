@@ -18,3 +18,4 @@ def create_access_token(user_id: int, role: str) -> str:
 
 def decode_token(token: str) -> dict:
     return jwt.decode(token, settings.auth_config.secret_key, algorithms=[settings.auth_config.algorithm])
+
