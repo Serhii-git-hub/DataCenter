@@ -4,8 +4,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from auth.deps import get_current_user
-from auth.security import verify_password, create_access_token
+from src.auth.deps import get_current_user
+from src.auth.security import verify_password, create_access_token
 from db.db_helper import db_helper
 
 from model.users import User
