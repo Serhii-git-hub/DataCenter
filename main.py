@@ -10,6 +10,7 @@ from db.db_helper import db_helper
 
 from routers.auth import router as auth_router
 from routers.categories import router as category_router
+from routers.suppliers import router as supplier_router
 
 
 @asynccontextmanager
@@ -23,10 +24,7 @@ main_app = FastAPI(
 )
 main_app.include_router(auth_router)
 main_app.include_router(category_router)
-@main_app.get("/health")
-async def health(session: AsyncSession = Depends(db_helper.session_getter)):
-    result = await session.execute(text("SELECT 1"))
-    return {"status": "ok", "db": result.scalar()}
+main_app.include_router(supplier_router)
 
 if __name__ == "__main__":
     uvicorn.run('main:main_app',
